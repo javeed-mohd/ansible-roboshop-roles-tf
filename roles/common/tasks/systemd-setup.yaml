@@ -1,0 +1,9 @@
+- name: "Copy {{ component }} service"
+  ansible.builtin.template:
+    src: "{{ component }}.service.j2" # Template has placeholders so we used .j2 extension here to define catalogue.service as template...
+    dest: "/etc/systemd/system/{{ component }}.service"
+  notify: Restart "{{ component }}" # Last
+
+- name: Daemon reload
+  ansible.builtin.systemd_service:
+    daemon_reload: true

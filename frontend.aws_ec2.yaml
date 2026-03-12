@@ -1,0 +1,18 @@
+plugin: amazon.aws.aws_ec2
+regions: # 1
+- us-east-1
+# hostnames: # 2
+# - ip-address
+hostnames: # 3
+- private-ip-address
+filters: # 4
+  instance-state-name : running
+  tag:Name: frontend-dev # How many frontend-dev servers are running there private-ip-address are displayed
+compose: # 5
+  # This sets the ansible_host variable to connect with the private IP address without changing the hostname.
+  ansible_host: private_ip_address
+keyed_groups: # 6
+- separator: ''
+  # name of the group is frontend
+  # key: tags.Component # It is used to display all the ip addresses of provided Name
+  key: tags.Name | regex_replace('-.*$', '') # To get frontend in output from frontend-dev

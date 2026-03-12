@@ -1,0 +1,45 @@
+- name: App setup
+  tags:
+  - deployment # Which is used to run only few tasks or particular tasks... Only with tags mentioned are shown on the terminal
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup.yaml
+
+- name: NodeJS setup
+  tags:
+  - deployment
+  # ansible.builtin.import_role: # import_role respects the tags. if you apply tags to import_role those will be automatically applied to all the tasks inside that role...
+  ansible.builtin.include_role: # include_role does not respect tags. It dynamically loads and executes a role during playbook execution, allowing conditional logic, loops, and variable overrides.
+    name: common # include_role is used usually to skip the tasks execution whichever tags are specified
+    tasks_from: nodejs-setup.yaml
+
+- name: Systemd setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd-setup.yaml
+
+- name: Copy mongo repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Install MongoDB client
+  ansible.builtin.dnf:
+    name: mongodb-mongosh # We can also use package module but dnf is preferable
+    state: present
+
+- name: Check products loaded
+  ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  register: catalogue_output
+
+- name: Load the products
+  ansible.builtin.shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
+  when: catalogue_output.stdout  | int < 0
+
+- name: Start the Catalogue
+  tags:
+  - deployment
+  ansible.builtin.service:
+    name: catalogue
+    state: restarted
+    enabled: yes

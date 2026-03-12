@@ -1,0 +1,17 @@
+- name: Install Maven and MySQL
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - maven
+  - mysql
+
+- name: Install dependencies
+  ansible.builtin.command: mvn  clean package
+  args: 
+    chdir: /app # It is used to pass additional parameters to a module like working directory, conditions, or file checks (Change directory before running the mvn clean package command)
+
+- name: Renaming the jar file
+  ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar # Moving and renaming the file
+  args:
+    chdir: /app
