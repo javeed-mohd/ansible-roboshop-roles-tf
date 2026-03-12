@@ -9,6 +9,7 @@
     state: restarted
     enabled: yes
 
+# We have to import python libraries botocore and boto3 for proper execution
 - name: install botocore and boto3
   ansible.builtin.pip:
     name: "{{ item }}"
