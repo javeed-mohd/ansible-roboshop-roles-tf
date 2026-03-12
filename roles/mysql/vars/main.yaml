@@ -1,2 +1,2 @@
 # component: mysql
-# MYSQL_ROOT_PASSWORD: "RoboShop@1"
+# Because, We should not store passwords in github
