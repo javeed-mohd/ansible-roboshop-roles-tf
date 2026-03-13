@@ -1,13 +1,13 @@
 ansible_user: ec2-user
 ansible_password: DevOps321
-MONGODB_HOST: mongodb-dev.devopsdaws.online
-CATALOGUE_HOST: catalogue-dev.devopsdaws.online
-REDIS_HOST: redis-dev.devopsdaws.online
-USER_HOST: user-dev.devopsdaws.online
-CART_HOST: cart-dev.devopsdaws.online
-MYSQL_HOST: mysql-dev.devopsdaws.online
-SHIPPING_HOST: shipping-dev.devopsdaws.online
-RABBITMQ_HOST: rabbitmq-dev.devopsdaws.online
-PAYMENT_HOST: payment-dev.devopsdaws.online
+MONGODB_HOST: mongodb-"{{ env }}".devopsdaws.online
+CATALOGUE_HOST: catalogue-"{{ env }}".devopsdaws.online
+REDIS_HOST: redis-"{{ env }}".devopsdaws.online
+USER_HOST: user-"{{ env }}".devopsdaws.online
+CART_HOST: cart-"{{ env }}".devopsdaws.online
+MYSQL_HOST: mysql-"{{ env }}".devopsdaws.online
+SHIPPING_HOST: shipping-"{{ env }}".devopsdaws.online
+RABBITMQ_HOST: rabbitmq-"{{ env }}".devopsdaws.online
+PAYMENT_HOST: payment-"{{ env }}".devopsdaws.online
 
 # We can also keep this in inventory.ini by [all:vars] (Both are same)
