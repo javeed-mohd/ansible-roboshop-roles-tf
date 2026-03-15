@@ -9,5 +9,7 @@ MYSQL_HOST: mysql-"{{ env }}".devopsdaws.online
 SHIPPING_HOST: shipping-"{{ env }}".devopsdaws.online
 RABBITMQ_HOST: rabbitmq-"{{ env }}".devopsdaws.online
 PAYMENT_HOST: payment-"{{ env }}".devopsdaws.online
+app_version: v3
 
 # We can also keep this in inventory.ini by [all:vars] (Both are same)
+# Usually, we need to provide app_verion specifically for individual components
