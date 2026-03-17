@@ -1,14 +1,14 @@
 ansible_user: ec2-user
 ansible_password: DevOps321
 MONGODB_HOST: mongodb-{{ env }}.devopsdaws.online
-CATALOGUE_HOST: catalogue-{{ env }}.devopsdaws.online
 REDIS_HOST: redis-{{ env }}.devopsdaws.online
-USER_HOST: user-{{ env }}.devopsdaws.online
-CART_HOST: cart-{{ env }}.devopsdaws.online
 MYSQL_HOST: mysql-{{ env }}.devopsdaws.online
-SHIPPING_HOST: shipping-{{ env }}.devopsdaws.online
 RABBITMQ_HOST: rabbitmq-{{ env }}.devopsdaws.online
-PAYMENT_HOST: payment-{{ env }}.devopsdaws.online
+CATALOGUE_HOST: catalogue.backend-alb-{{ env }}.devopsdaws.online
+USER_HOST: user.backend-alb-{{ env }}.devopsdaws.online
+CART_HOST: cart.backend-alb-{{ env }}.devopsdaws.online
+SHIPPING_HOST: shipping.backend-alb-{{ env }}.devopsdaws.online
+PAYMENT_HOST: payment.backend-alb-{{ env }}.devopsdaws.online
 app_version: v3
 
 # We can also keep this in inventory.ini by [all:vars] (Both are same)
